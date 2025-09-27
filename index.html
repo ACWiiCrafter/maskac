@@ -29,26 +29,22 @@
       background: white;
       z-index: 9999;
     }
-    #loader.dark { background: #000; }
 
     .spinner {
-      --uib-size: 60px;
-      --uib-color: black;
+      --uib-size: 100px;   /* taille de la roue */
+      --uib-color: #4f46e5; /* couleur (indigo) */
       --uib-speed: .9s;
-      --uib-stroke: 5px;
+      --uib-stroke: 8px;
       --mask-size: calc(var(--uib-size) / 2 - var(--uib-stroke));
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
       height: var(--uib-size);
       width: var(--uib-size);
       -webkit-mask: radial-gradient(circle var(--mask-size), transparent 99%, #000 100%);
       mask: radial-gradient(circle var(--mask-size), transparent 99%, #000 100%);
       background-image: conic-gradient(transparent 25%, var(--uib-color));
-      animation: spin calc(var(--uib-speed)) linear infinite;
+      animation: spin var(--uib-speed) linear infinite;
       border-radius: 50%;
     }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
@@ -154,21 +150,16 @@
   </div>
 
   <script>
-    // Initialisation : loader pendant 3 secondes puis affichage du contenu
+    // Loader 3 secondes
     window.addEventListener("load", () => {
       setTimeout(() => {
-        const loader = document.getElementById("loader");
-        const content = document.getElementById("content");
-        if (loader) loader.style.display = "none";
-        if (content) content.style.display = "block";
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("content").style.display = "block";
       }, 3000);
     });
 
-    // Mise à jour automatique de l'année (script bien placé à la fin)
-    (function setYear() {
-      const el = document.getElementById('year');
-      if (el) el.textContent = new Date().getFullYear();
-    })();
+    // Mise à jour automatique de l'année
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
 </body>
